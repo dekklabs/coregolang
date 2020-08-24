@@ -19,11 +19,11 @@ func Running() {
 
 	port := os.Getenv("PORT")
 
-	if port != "" {
+	if port == "" {
 		port = "5000"
 	}
 
-	draw.Drawing()
+	draw.Drawing(port)
 
 	handler := cors.Default().Handler(r)
 

@@ -8,4 +8,5 @@ import (
 //Routers rutas del frontend
 func Routers(router *mux.Router) {
 	router.HandleFunc("/api/v1/register", api.RegistroUsuarioApi).Methods("POST")
+	router.HandleFunc("/api/v1/login", api.LoginApi).Methods("POST")
 }

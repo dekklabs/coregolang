@@ -5,11 +5,11 @@ import (
 )
 
 //Drawing muestra la gráfica en consola cuando se ejecuta el programa
-func Drawing() {
+func Drawing(port string) {
 	fmt.Println(`
 ~ Dekklabs
 |--------------------------------|--------------|
-| Servidor Corriendo Hot Reload  | Puerto: 5000 |
+| Servidor Corriendo Hot Reload  | Puerto: ` + port + ` |
 |:-------------------------------|:------------:|
 |  DDDDD     DDDDD   D    D   D    D            |
 |  D    D    D       D  D     D  D              |
