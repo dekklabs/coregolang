@@ -1,8 +1,6 @@
 package utils
 
 import (
-	"fmt"
-
 	"github.com/dekklabs/apirest/src/db"
 	"github.com/dekklabs/apirest/src/entities"
 )
@@ -50,8 +48,6 @@ func VerifyExistsUser(usernameVerify string) (user entities.Usuario, encontrado 
 			return user, encontrado, err
 		}
 
-		password = ""
-
 		user = entities.Usuario{
 			ID:          id,
 			Nombre:      nombre,
@@ -69,8 +65,6 @@ func VerifyExistsUser(usernameVerify string) (user entities.Usuario, encontrado 
 		encontrado = false
 		return user, encontrado, nil
 	}
-
-	fmt.Println(user)
 
 	encontrado = true
 	return user, encontrado, nil

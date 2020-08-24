@@ -22,6 +22,7 @@ func Login(username, password string) (entities.Usuario, bool) {
 	user.Password = ""
 
 	err := bcrypt.CompareHashAndPassword(userPassword, passwordBody)
+
 	if err != nil {
 		return usuario, false
 	}

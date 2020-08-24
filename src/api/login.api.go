@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/dekklabs/apirest/src/entities"
@@ -9,6 +10,7 @@ import (
 	"github.com/dekklabs/apirest/src/tokenjwt"
 )
 
+//LoginApi api para el inicio de sesion de un usuario
 func LoginApi(w http.ResponseWriter, r *http.Request) {
 	var usuario entities.Usuario
 
@@ -35,6 +37,8 @@ func LoginApi(w http.ResponseWriter, r *http.Request) {
 	resp := entities.ResponseLogin{
 		Token: jwtKey,
 	}
+
+	fmt.Println(resp)
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

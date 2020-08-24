@@ -30,6 +30,6 @@ func Running() {
 	err := http.ListenAndServe(":"+port, handler)
 
 	if err != nil {
-		fmt.Println("Error ", err)
+		fmt.Println("Error servidor", err)
 	}
 }
