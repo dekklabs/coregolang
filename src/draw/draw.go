@@ -2,20 +2,28 @@ package draw
 
 import (
 	"fmt"
+
+	"github.com/dekklabs/apirest/src/db"
 )
 
 //Drawing muestra la gráfica en consola cuando se ejecuta el programa
 func Drawing(port string) {
+
+	_, err := db.Conexion()
+
+	databaseStatus := "OFF"
+
+	if err == nil {
+		databaseStatus = "ON"
+	}
+
 	fmt.Println(`
 ~ Dekklabs
-|--------------------------------|--------------|
-| Servidor Corriendo Hot Reload  | Puerto: ` + port + ` |
-|:-------------------------------|:------------:|
-|  DDDDD     DDDDD   D    D   D    D            |
-|  D    D    D       D  D     D  D              |
-|  D     D   DDDDD   DD       DD                |
-|  D    D    D       D  D     D  D              |
-|  DDDDD     DDDDD   D    D   D    D            |
-|--------------------------------|--------------|
+|--------------------------------|--------------
+| Server running                 | Puerto: ` + port + `
+|:----------------------------------------------
+|                                               
+| database                       |      ` + databaseStatus + `
+|--------------------------------|--------------
 	`)
 }

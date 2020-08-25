@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -14,9 +15,12 @@ func Conexion() (db *sql.DB, err error) {
 	dbPass := "123456"
 	dbName := "apirest"
 
-	db, err = sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	db, _ = sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	err = db.Ping()
+
 	if err != nil {
-		panic(err)
+		fmt.Println("Error al conectar a la base de datos")
 	}
+
 	return
 }
