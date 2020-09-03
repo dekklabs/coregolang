@@ -2,5 +2,8 @@ package entities
 
 //ResponseLogin entidad token
 type ResponseLogin struct {
-	Token string `json:"token"`
+	Error   bool   `json:"error"`
+	Message string `json:"message"`
+	Status  bool   `json:"status"`
+	Token   string `json:"token"`
 }

@@ -2,12 +2,12 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/dekklabs/apirest/src/entities"
 	"github.com/dekklabs/apirest/src/model"
 	"github.com/dekklabs/apirest/src/tokenjwt"
+	"github.com/dekklabs/apirest/src/tools"
 )
 
 //LoginApi api para el inicio de sesion de un usuario
@@ -17,28 +17,35 @@ func LoginApi(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&usuario)
 
 	if err != nil {
-		http.Error(w, "Usuario y/o contraseña inválidas", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		resp := tools.ResponseApiLogin(true, "Usuario y/o contraseña inválidas", false, "")
+		json.NewEncoder(w).Encode(resp)
 		return
 	}
 
 	user, exists := model.Login(usuario.Username, usuario.Password)
 
 	if exists == false {
-		http.Error(w, "Usuario no existe", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		resp := tools.ResponseApiLogin(true, "Usuario no existe", false, "")
+		json.NewEncoder(w).Encode(resp)
 		return
 	}
 
 	jwtKey, errjwt := tokenjwt.GenerateJWT(user)
 	if errjwt != nil {
-		http.Error(w, "Ocurrió un error al intentar generar el token correspondiente", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		resp := tools.ResponseApiLogin(true, "Ocurrió un error al intentar generar el token correspondiente", false, "")
+		json.NewEncoder(w).Encode(resp)
 		return
 	}
 
 	resp := entities.ResponseLogin{
-		Token: jwtKey,
+		Error:   false,
+		Message: "perfecto",
+		Status:  true,
+		Token:   jwtKey,
 	}
-
-	fmt.Println(resp)
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
