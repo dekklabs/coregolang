@@ -25,7 +25,15 @@ func Running() {
 
 	draw.Drawing(port)
 
-	handler := cors.Default().Handler(r)
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"X-Requested-With", "Content-Type", "Authorization"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
+
+	handler := c.Handler(r)
 
 	err := http.ListenAndServe(":"+port, handler)
 
