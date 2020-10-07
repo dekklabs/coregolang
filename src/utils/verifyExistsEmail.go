@@ -8,7 +8,7 @@ import (
 func VerifyExistsEmail(emailBody string) (encontrado bool, err error) {
 	db, _ := db.Conexion()
 
-	row := db.QueryRow("select * from user where email = ? LIMIT 1", emailBody)
+	row := db.QueryRow("select * from usuario where email = ? LIMIT 1", emailBody)
 
 	var id int64
 	var nombre string

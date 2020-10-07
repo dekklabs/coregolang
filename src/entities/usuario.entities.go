@@ -8,7 +8,7 @@ type Usuario struct {
 	Username    string `json:"username"`
 	Password    string `json:"password,omitempty"`
 	Email       string `json:"email"`
-	Description string `json:"description,omitempty"`
+	Description string `json:"description"`
 	Image       string `json:"image,omitempty"`
 	Cover       string `json:"cover,omitempty"`
 	Created_at  string `json:"created_at"`

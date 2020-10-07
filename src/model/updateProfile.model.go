@@ -10,7 +10,7 @@ func UpdateProfileModel(usuario *entities.Usuario) (int64, error) {
 	db, _ := db.Conexion()
 
 	row, err := db.Exec(
-		"UPDATE user SET nombre = ?, apellido = ?, username = ?, description = ? WHERE id = ?",
+		"UPDATE usuario SET nombre = ?, apellido = ?, username = ?, description = ? WHERE id = ?",
 		usuario.Nombre, usuario.Apellido, usuario.Username, usuario.Description, usuario.ID)
 
 	if err != nil {

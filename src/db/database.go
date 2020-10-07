@@ -11,7 +11,7 @@ import (
 func Conexion() (db *sql.DB, err error) {
 
 	dbDriver := "mysql"
-	dbUser := "root"
+	dbUser := "dekk"
 	dbPass := "123456"
 	dbName := "apirest"
 	dbHost := "tcp(127.0.0.1:3306)"

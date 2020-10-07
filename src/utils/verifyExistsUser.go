@@ -9,7 +9,7 @@ import (
 func VerifyExistsUser(usernameVerify string) (user entities.Usuario, encontrado bool, err error) {
 	db, _ := db.Conexion()
 
-	rows, err := db.Query("select * from user where username = ? limit 1", usernameVerify)
+	rows, err := db.Query("select * from usuario where username = ? limit 1", usernameVerify)
 
 	if err != nil {
 		encontrado = false

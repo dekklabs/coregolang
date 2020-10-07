@@ -18,7 +18,7 @@ func RegistroUsuario(usuario *entities.Usuario) (err error) {
 	usuario.Image = ""
 	usuario.Cover = ""
 
-	results, err := db.Exec(`insert into user(
+	results, err := db.Exec(`insert into usuario(
 		nombre,
 		apellido,
 		username,

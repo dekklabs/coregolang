@@ -9,7 +9,7 @@ import (
 func VerifyExistsUsername(usernameVerify string) (user entities.Usuario, encontrado bool, err error) {
 	db, _ := db.Conexion()
 
-	row := db.QueryRow("select * from user where username = ? limit 1", usernameVerify)
+	row := db.QueryRow("select * from usuario where username = ? limit 1", usernameVerify)
 
 	var id int64
 	var nombre string

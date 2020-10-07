@@ -18,7 +18,7 @@ func LoginApi(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		resp := tools.ResponseApiLogin(true, "Usuario y/o contraseña inválidas", false, "")
+		resp := tools.ResponseApiLogin(true, "Usuario y/o contraseña inválidas", "")
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
@@ -27,7 +27,7 @@ func LoginApi(w http.ResponseWriter, r *http.Request) {
 
 	if exists == false {
 		w.WriteHeader(http.StatusBadRequest)
-		resp := tools.ResponseApiLogin(true, "Usuario no existe", false, "")
+		resp := tools.ResponseApiLogin(true, "Usuario no existe", "")
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
@@ -35,15 +35,14 @@ func LoginApi(w http.ResponseWriter, r *http.Request) {
 	jwtKey, errjwt := tokenjwt.GenerateJWT(user)
 	if errjwt != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		resp := tools.ResponseApiLogin(true, "Ocurrió un error al intentar generar el token correspondiente", false, "")
+		resp := tools.ResponseApiLogin(true, "Ocurrió un error al intentar generar el token correspondiente", "")
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
 
 	resp := entities.ResponseLogin{
 		Error:   false,
-		Message: "perfecto",
-		Status:  true,
+		Message: "ok",
 		Token:   jwtKey,
 	}
 
