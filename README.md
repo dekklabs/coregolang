@@ -3,7 +3,7 @@
 - Install: go get github.com/githubnemo/CompileDaemon
 - Run: CompileDaemon
 
-## On windows
+## On Windows
 - Run: hot.bat
 
 ## On Linux
