@@ -1,0 +1,19 @@
+package products
+
+import (
+	"github.com/dekklabs/apirest/src/db"
+	"github.com/dekklabs/apirest/src/entities"
+)
+
+//CrearProduct sentencia SQL que crea un producto
+func CrearProduct(product *entities.Product) (err error) {
+	db, _ := db.Conexion()
+
+	_, err = db.Exec(`S`)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

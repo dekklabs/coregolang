@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 
 	"github.com/dekklabs/apirest/src/entities"
 	"github.com/dekklabs/apirest/src/middlew"
 	"github.com/dekklabs/apirest/src/model/usermodel"
+	"github.com/dekklabs/apirest/src/tools"
 )
 
 type responseImage struct {
@@ -22,7 +22,7 @@ type responseImage struct {
 func UploadAvatarAPI(w http.ResponseWriter, r *http.Request) {
 	file, handler, err := r.FormFile("avatar")
 
-	var extension = strings.Split(handler.Filename, ".")[1]
+	var extension = tools.GetExtension(handler.Filename)
 
 	var idUser = strconv.Itoa(int(middlew.IDUsuario))
 

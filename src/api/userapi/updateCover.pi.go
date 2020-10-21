@@ -5,7 +5,8 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
+
+	"github.com/dekklabs/apirest/src/tools"
 
 	"github.com/dekklabs/apirest/src/entities"
 	"github.com/dekklabs/apirest/src/model/usermodel"
@@ -17,11 +18,11 @@ import (
 func UpdateCoverAPI(w http.ResponseWriter, r *http.Request) {
 	file, handler, err := r.FormFile("cover")
 
-	var extension = strings.Split(handler.Filename, ".")[1]
+	var extension = tools.GetExtension(handler.Filename)
 
 	var id = strconv.Itoa(int(middlew.IDUsuario))
 
-	var archivo string = "uploads/covers/" + id + "." + extension
+	var archivo string = "uploads/covers/" + id + "-" + middlew.Username + "." + extension
 
 	f, err := os.OpenFile(archivo, os.O_WRONLY|os.O_CREATE, 0666)
 
@@ -38,10 +39,10 @@ func UpdateCoverAPI(w http.ResponseWriter, r *http.Request) {
 
 	var usuario entities.Usuario
 	var status int64
-	usuario.Cover = id + "." + extension
+	usuario.Cover = id + "-" + middlew.Username + "." + extension
 	status, err = usermodel.UpdateCover(usuario, id)
 
-	if err != nil || status == 0 {
+	if err != nil || status != 0 {
 		http.Error(w, "Error al grabar la imagen", http.StatusBadRequest)
 		return
 	}
